@@ -1,7 +1,9 @@
+from urllib.parse import urlparse
 import requests
 from requests.exceptions import RequestException
 from datetime import datetime
 from functools import reduce
+
 from app.core.models import APIInfo
 from app.settings import get_apis
 from app.web.response import CoinResponse
@@ -11,8 +13,8 @@ def _resolve_key(data: dict | list, key_path: str):
     keys = key_path.split(".")
 
     def _reduce_func(acc, key):
-        if isinstance(key, int):
-            return acc[key]
+        if key.isdigit() and isinstance(acc, list):
+            return acc[int(key)]
         return acc.get(key, {})
 
     value = reduce(_reduce_func, keys, data)
@@ -42,7 +44,13 @@ def get_symbol_price(symbol: str) -> CoinResponse | None:
     req = requests.Response()
     for api in apis:
         try:
-            req = requests.get(api["uri"].format(api.get("symbols", {})[symbol]))
+            uri = api["uri"].format(api.get("symbols", {})[symbol])
+            headers = {
+                "Host": urlparse(uri).netloc,
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:77.0) Gecko/20100101 Firefox/77.0",
+                "Accept": "application/json",
+            }
+            req = requests.get(uri, headers=headers)
             if req.status_code != 200:
                 print(
                     f"API {api['name']} returned status code {req.status_code}: {req.reason}"
