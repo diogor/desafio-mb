@@ -11,6 +11,7 @@ python = "^3.11"
 fastapi = "^0.115.3"
 granian = "^1.6.1"
 environs = "^11.0.0"
+requests = "^2.32.3"
 
 
 [build-system]
