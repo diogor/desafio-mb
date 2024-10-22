@@ -1,7 +1,7 @@
 port = 8000
 host = 0.0.0.0
 
-.PHONY: run
+.PHONY: api
 
-run:
+api:
 	granian --interface asgi app.web.main:app --port $(port) --host $(host)
