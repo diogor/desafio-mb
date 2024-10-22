@@ -41,7 +41,6 @@ def _get_data(api_defs: APIInfo, data: dict | list) -> dict:
 def get_symbol_price(symbol: str) -> CoinResponse | None:
     apis = get_apis()
     resp = None
-    req = requests.Response()
     for api in apis:
         try:
             uri = api["uri"].format(api.get("symbols", {})[symbol])
