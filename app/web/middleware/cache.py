@@ -5,7 +5,7 @@ from starlette.concurrency import iterate_in_threadpool
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import StreamingResponse, Response
 
-from app.web.caching.backend import BaseBackend
+from app.web.adapters.cache.backend import BaseBackend
 from app.settings import CACHE_SECONDS
 
 
@@ -35,8 +35,9 @@ class CacheMiddleware(BaseHTTPMiddleware):
         request_type = request.method
         auth = request.headers.get("Authorization", "Bearer public")
         token = auth.split(" ")[1]
+        body = await request.json()
 
-        key = f"{path_url}_{token}"
+        key = f"{path_url}_{token}_{body.get('symbol', '')}"
 
         matches = self.matches_any_path(path_url)
         if not matches or request_type not in self.cached_methods:

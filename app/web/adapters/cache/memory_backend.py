@@ -1,5 +1,5 @@
 import time
-from app.web.caching.backend import BaseBackend
+from app.web.adapters.cache.backend import BaseBackend
 
 
 class MemoryBackend(BaseBackend):

@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, status
 
 from app.core.services import get_symbol_price
-from app.web.caching.memory_backend import MemoryBackend
+from app.web.adapters.cache.memory_backend import MemoryBackend
 from app.web.request import CoinRequest
 from app.web.response import CoinResponse
 from app.web.middleware.cache import CacheMiddleware
