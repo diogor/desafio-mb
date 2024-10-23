@@ -35,25 +35,25 @@ Consiste em uma API que retorna a cotação para o símbolo de um ativo.
 - Ative o seu **virtualenv** ou rode os comandos a seguir com seu gerenciador de dependências:
 ### Migração de dados
 Devido ao sistema básico de autenticação, é necessário uma migração de banco.
-    - Utilizando poetry:
-        ```sh
-        poetry run make migrate
-        ```
-    - Ou utilizando o virtualenv:
-        ```sh
-        source .venv/bin/activate
-        make migrate
-        ```
+- Utilizando poetry:
+    ```sh
+    poetry run make migrate
+    ```
+- Ou utilizando o virtualenv:
+    ```sh
+    source .venv/bin/activate
+    make migrate
+    ```
 ### Rodando a aplicação
 Pode ser iniciada com parâmetros adicionais de porta e host: `port=<port>` e `host=<ip>`
-    - Utilizando poetry:
-        ```sh
-        poetry run make api
-        ```
-    - Ou utilizando o virtualenv:
-        ```sh
-        source .venv/bin/activate
-        make api
-        ```
+- Utilizando poetry:
+    ```sh
+    poetry run make api
+    ```
+- Ou utilizando o virtualenv:
+    ```sh
+    source .venv/bin/activate
+    make api
+    ```
 ### Interface de documentação (swagger)
 A documentação básica da api pode ser acessada na URL: `/docs`
