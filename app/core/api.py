@@ -7,6 +7,7 @@ from functools import reduce
 from app.models.api import APIInfo
 from app.settings import get_apis
 from app.web.response import CoinResponse
+from app.settings import logger
 
 
 def _get_dolar_price(brl_value) -> float:
@@ -62,15 +63,15 @@ def get_symbol_price(symbol: str) -> CoinResponse | None:
             }
             req = requests.get(uri, headers=headers)
             if req.status_code != 200:
-                print(
+                logger.error(
                     f"API {api['name']} returned status code {req.status_code}: {req.reason}"
                 )
                 continue
         except KeyError:
-            print(f"Coin {symbol} not found on API {api['name']}")
+            logger.error(f"Coin {symbol} not found on API {api['name']}")
             continue
         except RequestException as e:
-            print(e)
+            logger.error(f"API {api['name']} error: {e}")
             continue
 
         api_info = APIInfo(

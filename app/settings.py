@@ -1,6 +1,6 @@
+import logging
 import configparser
 from environs import Env
-
 
 env = Env()
 env.read_env()
@@ -13,6 +13,14 @@ DATABASE_URL = env("DATABASE_URL", "sqlite:///app.db")
 SECRET_KEY = env("SECRET_KEY", "secret")
 JWT_ALGORITHM = env("JWT_ALGORITHM", "HS256")
 ACCESS_TOKEN_EXPIRE_MINUTES = env.int("ACCESS_TOKEN_EXPIRE_MINUTES", 15)
+
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(
+    level=logging.DEBUG,
+    filename="application.log",
+    format="%(asctime)s - %(levelname)s - %(message)s",
+)
 
 
 def get_apis():
