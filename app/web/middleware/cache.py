@@ -1,4 +1,5 @@
 from typing import List
+from json.decoder import JSONDecodeError
 
 from fastapi import Request
 from starlette.concurrency import iterate_in_threadpool
@@ -35,7 +36,10 @@ class CacheMiddleware(BaseHTTPMiddleware):
         request_type = request.method
         auth = request.headers.get("Authorization", "Bearer public")
         token = auth.split(" ")[1]
-        body = await request.json()
+        try:
+            body = await request.json()
+        except JSONDecodeError:
+            body = await request.form()
 
         key = f"{path_url}_{token}_{body.get('symbol', '')}"
 

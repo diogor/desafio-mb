@@ -7,8 +7,12 @@ env.read_env()
 
 APIS_CONFIG = configparser.ConfigParser()
 SYMBOLS_CONFIG = configparser.ConfigParser()
+
 CACHE_SECONDS = env.int("CACHE_SECONDS", 10)
 DATABASE_URL = env("DATABASE_URL", "sqlite:///app.db")
+SECRET_KEY = env("SECRET_KEY", "secret")
+JWT_ALGORITHM = env("JWT_ALGORITHM", "HS256")
+ACCESS_TOKEN_EXPIRE_MINUTES = env.int("ACCESS_TOKEN_EXPIRE_MINUTES", 15)
 
 
 def get_apis():

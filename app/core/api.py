@@ -4,7 +4,7 @@ from requests.exceptions import RequestException
 from datetime import datetime
 from functools import reduce
 
-from app.core.models import APIInfo
+from app.models.api import APIInfo
 from app.settings import get_apis
 from app.web.response import CoinResponse
 

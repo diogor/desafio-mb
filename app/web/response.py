@@ -12,3 +12,9 @@ class CoinResponse(BaseModel):
     @field_serializer("date_consult")
     def date_consult_format(self, value):
         return value.strftime("%Y-%m-%d %H:%M:%S")
+
+
+class UserResponse(BaseModel):
+    id: int | None
+    username: str
+    email: str | None = None
