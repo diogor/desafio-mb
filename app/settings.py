@@ -1,7 +1,13 @@
 import configparser
+from environs import Env
+
+
+env = Env()
+env.read_env()
 
 APIS_CONFIG = configparser.ConfigParser()
 SYMBOLS_CONFIG = configparser.ConfigParser()
+CACHE_SECONDS = env.int("CACHE_SECONDS", 10)
 
 
 def get_apis():
