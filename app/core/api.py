@@ -9,6 +9,15 @@ from app.settings import get_apis
 from app.web.response import CoinResponse
 
 
+def _get_dolar_price(brl_value) -> float:
+    api_url = "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao='{}'&$top=1&$format=json&$select=cotacaoCompra"
+    uri = api_url.format(datetime.now().strftime("%m-%d-%Y"))
+    response = requests.get(uri)
+    price = response.json()["value"][0]["cotacaoCompra"]
+
+    return float(brl_value) / float(price)
+
+
 def _resolve_key(data: dict | list, key_path: str):
     keys = key_path.split(".")
 
@@ -32,7 +41,9 @@ def _get_data(api_defs: APIInfo, data: dict | list) -> dict:
         _resolve_key(data, api_defs.symbol) if api_defs.symbol else None
     )
     response["coin_price"] = _resolve_key(data, api_defs.coin_price)
-    response["coin_price_dolar"] = _resolve_key(data, api_defs.coin_price)
+    response["coin_price_dolar"] = _get_dolar_price(
+        _resolve_key(data, api_defs.coin_price)
+    )
     response["date_consult"] = datetime.now()
 
     return response
