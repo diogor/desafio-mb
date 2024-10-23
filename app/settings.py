@@ -8,6 +8,7 @@ env.read_env()
 APIS_CONFIG = configparser.ConfigParser()
 SYMBOLS_CONFIG = configparser.ConfigParser()
 CACHE_SECONDS = env.int("CACHE_SECONDS", 10)
+DATABASE_URL = env("DATABASE_URL", "sqlite:///app.db")
 
 
 def get_apis():
