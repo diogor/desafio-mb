@@ -27,6 +27,8 @@ Consiste em uma API que retorna a cotação para o símbolo de um ativo.
 - Modifique as variáveis de ambiente do arquivo `.env` de acordo com suas necessidades, ou siga com o padrão.
 
 ### Configuração da aplicação (opcional)
+Como é necessário chamar outra api que não a do MB, e elas são diferentes tanto na url quanto na resposta,
+achei que valia a pena usar uma configuração padronizada para ser fácil utilizar qualquer estrutura de API.
 - Dentro do diretório `config/`, existem 2 arquivos `.ini`:
     - `apis.ini`: Configurações das apis de consulta.
     - `symbols.ini`: Configurações dos ativos disponíveis.
