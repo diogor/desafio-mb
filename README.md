@@ -57,5 +57,9 @@ Pode ser iniciada com parâmetros adicionais de porta e host: `port=<port>` e `h
     source .venv/bin/activate
     make api
     ```
+#### Endpoints:
+- `POST /coin_infos`: Retorna a cotação para o símbolo de um ativo.
+- `POST /users/`: Cria um novo usuário.
+- `POST /token`: Retorna um novo token de acesso.
 ### Interface de documentação (swagger)
 A documentação básica da api pode ser acessada na URL: `/docs`
